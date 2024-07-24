@@ -16,7 +16,7 @@
 
 
 
-  <table class="table" id="daftar-penjual">
+  <table class="table" id="daftar-siswa">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -71,16 +71,16 @@
   </style>
 
   <script type="module">
-    import { ambilDaftarAbsensi, formatAngka, hapusAbsensi } from './main.js';
+    import { ambilDaftarsiswa, formatAngka, hapussiswa } from './main.js';
 
     $(document).ready(async function() {
-      let elemenDaftar = $("#daftar-Absensi > tbody");
-      let daftarAbsensi = await ambilDaftarAbsensi();
+      let elemenDaftar = $("#daftar-siswa > tbody");
+      let daftarsiswa = await ambilDaftarsiswa();
       let nomor = 1;
 
 
 
-      daftarAbsensi.forEach((data) => {
+      daftarsiswa.forEach((data) => {
         elemenDaftar.append(
           '<tr>' +
           '<th>' + tanggal + '</th>' +
@@ -103,12 +103,12 @@
       });
 
       $('.tombol-hapus').click(async function() {
-        await hapusAbsensi($(this).attr('data'));
+        await hapussiswa($(this).attr('data'));
         location.reload();
       })
 
       $('.link-ubah').click(async function() {
-        window.location.replace('ubah-Absensi.html?docId=' + $(this).attr('data'));
+        window.location.replace('ubah-siswa.html?docId=' + $(this).attr('data'));
       })
 
       $('#loader').hide();
