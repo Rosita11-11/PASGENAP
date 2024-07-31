@@ -13,13 +13,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBm9HdJ92vSLrKRclI6Z2J4bmvlFgR4AuU",
-  authDomain: "rosita.firebaseapp.com",
-  projectId: "rosita",
-  storageBucket: "rosita.appspot.com",
-  messagingSenderId: "1094982396668",
-  appId: "1:1094982396668:web:2d103526ab40a59efc0579",
-  measurementId: "G-MF48P7VG5P"
+  apiKey: "AIzaSyBYd6vdeRvwnywCPqeWh5PcdcNJj1kLfoo",
+    authDomain: "insancemerlang-2953a.firebaseapp.com",
+    projectId: "insancemerlang-2953a",
+    storageBucket: "insancemerlang-2953a.appspot.com",
+    messagingSenderId: "134418826980",
+    appId: "1:134418826980:web:ce438f43a3da1456b44ef1",
+    measurementId: "G-K6CVYVCMZP"
 }
 // Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
