@@ -75,9 +75,7 @@ export async function hapusAbsensi(docId) {
   docId));
 }
 
-export function formatAngka(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
+
 
 export async function ubahAbsensi(tanggal, nis, nama, alamat, noTlpn, kelas, keterangan) {
     await updateDoc(doc(db, 'absensi',
