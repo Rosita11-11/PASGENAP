@@ -11,6 +11,7 @@ import {
   orderBy,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
+
 const firebaseConfig = {
   apiKey: "AIzaSyBm9HdJ92vSLrKRclI6Z2J4bmvlFgR4AuU",
   authDomain: "rosita.firebaseapp.com",
@@ -24,68 +25,121 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export async function ambilDaftarsiswa() {
-  const refDokumen = collection(db, "siswa");
+export async function ambilDaftarAbsensi() {
+  const refDokumen = collection(db, "absensi");
   const kueri = query(refDokumen, orderBy("nama"));
   const cuplikanKueri = await getDocs(kueri);
-  
+
   let hasil = [];
   cuplikanKueri.forEach((dok) => {
     hasil.push({
-      id: dok.id, 
+      id: dok.id,
       tanggal: dok.data().tanggal,
       nis: dok.data().nis,
       nama: dok.data().nama,
       alamat: dok.data().alamat,
-      notlpn: dok.data().notlpn,
+      noTlpn: dok.data().noTlpn,
       kelas: dok.data().kelas,
-      keterangan:dok.data().keterangan,
+      keterangan: dok.data().keterangan,
+
     });
   });
-  
+
+
+
   return hasil;
 }
 
 export function formatAngka(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."
+  );
 }
 
-export async function tambahsiswa(tanggal,nis,nama,alamat,notlpn,kelas, keterangan,) {
+export async function tambahAbsensi(tanggal, nis, nama, alamat, noTlpn, kelas, keterangan) {
   try {
-    const dokRef = await addDoc(collection(db, 'siswa'), {
-      tanggal:tanggal,
+    const dokRef = await addDoc(collection(db, 'absensi'), {
+      tanggal: tanggal,
       nis: nis,
-      nama:nama,
-      alamat:alamat,
-      notlpn:notlpn,
-      kelas:kelas,
-      keterangan:keteranhan
+      nama: nama,
+      alamat: alamat,
+      noTlpn: noTlpn,
+      kelas: kelas,
+      keterangan: keterangan
     });
-    console.log('Berhasil siswa' + dokRef.id);
+    console.log('berhasil menembah ' + dokRef.id);
   } catch (e) {
-    console.log('Gagal siswa' + e);
+    console.log('gagal menambah ' + e);
   }
 }
 
-export async function hapussiswa(docId) {
-  await deleteDoc(doc(db, "siswa", docId));
+export async function hapusAbsensi(docId) {
+  await deleteDoc(doc(db, "absensi", docId));
+}
+export async function ambilDaftarAbsensi() {
+  const refDokumen = collection(db, "absensi");
+  const kueri = query(refDokumen, orderBy("nama"));
+  const cuplikanKueri = await getDocs(kueri);
+
+  let hasil = [];
+  cuplikanKueri.forEach((dok) => {
+    hasil.push({
+      id: dok.id,
+      tanggal: dok.data().tanggal,
+      nis: dok.data().nis,
+      nama: dok.data().nama,
+      alamat: dok.data().alamat,
+      noTlpn: dok.data().noTlpn,
+      kelas: dok.data().kelas,
+      keterangan: dok.data().keterangan,
+
+    });
+  });
+
+
+
+  return hasil;
 }
 
-export async function ubahProduk(tanggak,nis, nama, alamat,notlpn,kelas, keterangan) {
-  await updateDoc(doc(db, "siswa", docId), { 
+export function formatAngka(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+export async function tambahAbsensi(tanggal, nis, nama, alamat, noTlpn, kelas, keterangan) {
+  try {
+    const dokRef = await addDoc(collection(db, 'absensi'), {
+      tanggal: tanggal,
+      nis: nis,
+      nama: nama,
+      alamat: alamat,
+      noTlpn: noTlpn,
+      kelas: kelas,
+      keterangan: keterangan
+    });
+    console.log('berhasil menembah ' + dokRef.id);
+  } catch (e) {
+    console.log('gagal menambah ' + e);
+  }
+}
+
+export async function hapusAbsensi(docId) {
+  await deleteDoc(doc(db, "absensi", docId));
+}
+
+export async function ubahAbsensi(docId, tanggal, nis, nama, alamat, noTlpn, kelas, keterangan) {
+  await updateDoc(doc(db, "absensi", docId), {
     tanggal: tanggal,
     nis: nis,
     nama: nama,
     alamat: alamat,
-    notlpn: notlpn,
+    noTlpn: noTlpn,
     kelas: kelas,
-    keterangan: keterangan,
+    keterangan: keterangan
   });
 }
 
-export async function ambilsiswa(docId) {
-  const docRef = await doc(db, "siswa", docId);
+export async function ambilAbsensi(docId) {
+  const docRef = await doc(db, "absensi", docId);
   const docSnap = await getDoc(docRef);
-  
+
   return await docSnap.data();
 }
