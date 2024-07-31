@@ -12,10 +12,7 @@
 </head>
 
 <body class="m-4">
-  <h1>PASGENAP</h1>
-
-
-
+  <h1>Daftar Data Absensi kls XII</h1>
   <table class="table" id="daftar-siswa">
     <thead>
       <tr>
@@ -32,43 +29,32 @@
     <tbody>
     </tbody>
   </table>
+  
+  <img src="loader.gif" style="width: 2em; display: block" id="loader">
 
-  <div class="d-flex justify-content-center">
-    <img src="loader.gif" style="width: 15em; display: block" id="loader">
-  </div>
 
-  <div class="d-flex justify-content-center">
-    <button onclick="location.href='forum-data-penjual.html'" style="background-color: blue; color: white; border-radius: 10px;">"Absensi_siswa"</button>
-  </div>
+  <script type="module">
+    import { ambilDaftarabsensi, formatAngka, hapusabsensi } from './main.js';
 
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    th,
-    td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-
-    .stack-up {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
-  </style>
+    $(document).ready(async function() {
+      let elemenDaftar = $("#daftar-absensi> tbody");
+      let daftarabsensi = await ambilDaftarabsensi();
+      let nomor = 1;
+ 
+ daftarabsensi.forEach((data) => {
+        elemenDaftar.append(
+          '<tr>' +
+          '<th>' + nomor + '</th>' +
+          '<td>' + data.tanggal + '</td>' +
+          '<td>' + data.nis + '</td>' +
+          '<td>' + data.tanggal+ '</td>'+
+          '<td>' + data.alamat+ '</td>'+
+          '<td>' + data.notlpn +'</td>' +
+          '<td>' + data.kelas + '</td>' +
+          '<td>' + data.keterangan + '</td>' +
+          '<td>' + '<button class="btn btn-danger tombol-hapus" data>' + '<td class="stack-up">' +
+          ' <a href="#" class="btn btn-warning link-ubah"  data="' +
+          data.id +:
 
   <script type="module">
     import { ambilDaftarsiswa, formatAngka, hapussiswa } from './main.js';
@@ -78,19 +64,17 @@
       let daftarsiswa = await ambilDaftarsiswa();
       let nomor = 1;
 
-
-
       daftarsiswa.forEach((data) => {
         elemenDaftar.append(
           '<tr>' +
           '<th>' + tanggal + '</th>' +
           '<td>' + data.nis + '</td>' +
           '<td>' + data.nama + '</td>' +  
-          '<td>' + data.noTlpn + '</td>' + 
+          '<td>' + data.alamat + '</td>' + 
+          '<td>' + data.notlp +'</td>' +
           '<td>' + data.kelas + '</td>' +
           '<td>' + data.keterangan +'</td>' +
-          
-          '<td class="stack-up">' +
+          '<td>' + '<button class="btn btn-danger tombol-hapus" data>' + '<td class="stack-up">' +
           ' <a href="#" class="btn btn-warning link-ubah"  data="' +
           data.id +
           '">ubah</a> ' +
@@ -102,25 +86,28 @@
         nomor = nomor + 1;
       });
 
-      $('.tombol-hapus').click(async function() {
-        await hapussiswa($(this).attr('data'));
-        location.reload();
-      })
+      $('#loader').hide();
 
+      $('.tombol-hapus').click(async function() {
+        $(this).attr('disabled', 'disabled');
+        $('#' + $(this).attr('data')).show();
+        await hapusabsensi($(this).attr('data'));
+        location.reload();
+      });
       $('.link-ubah').click(async function() {
-        window.location.replace('ubah-siswa.html?docId=' + $(this).attr('data'));
+        window.location.replace('ubah-absensi.html?docId=' + $(this).attr('data'));
       })
 
       $('#loader').hide();
 
     });
   </script>
-  footer  </span> 
+  <footer  </span> 
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="index.html" class="nav-link px-2 text-body-secondary">Beranda</a></li>
-      <li class="nav-item"><a href="forum-absensi.html" id="link-login-penjual" class="nav-link px-2 text-body-secondary">tambah data</a></li>
+      <li class="nav-item"><a href="forum-absensi.html" id="link-login-penjual" class="nav-link px-2 text-body-secondary">Lihat Absensi</a></li>
     </ul>
-    <p class="text-center text-body-secondary">&copy; </p>
+    <p class="text-center text-body-secondary">&copy; 2024 ABSEN SISWA </p>
   </footer>
 </body>
 

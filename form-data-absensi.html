@@ -65,11 +65,17 @@
       let elemenketerangan  = document.getElementById('input-keterangan');
       
       
-      tombolTambah.addEventListener('click', async function (e) {
+      tombolTambah.addEventListener('click'
+      , async function (e) {
         e.preventDefault();
-        await tambahAbsensi(elemenNamaTanggal.value, elemenNis.value, elemenNama.value, elemenAlamat.value, elemenNotlpn.value, elemenKelas.value, elemenKeterangan.value,);
         
-   //  window.location.href = 'index.html';
+        await tambahAbsensi(elemenNama.value,
+        elemenNis.value, elemenNama.value,
+        elemenAlamat.value, elemenNotlpn.
+        value, elemenKelas.value, 
+        elemenKeterangan.value,);
+        
+     window.location.href = 'index.html';
       });
     </script>
 </body>
